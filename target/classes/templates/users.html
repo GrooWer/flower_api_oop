@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Пользователи</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+<div class="container mt-5">
+    <h1>Пользователи</h1>
+    <a href="/users/add" class="btn btn-success mb-3">Добавить пользователя</a>
+    <div th:each="user : ${users}" class="border p-3 mb-2">
+        <p><strong>Логин:</strong> <span th:text="${user.login}"/></p>
+        <p><strong>Роль:</strong> <span th:text="${user.role}"/></p>
+        <a th:href="@{|/users/${user.id}/edit|}" class="btn btn-warning">Редактировать</a>
+        <form th:action="@{|/users/${user.id}/delete|}" method="post" style="display:inline;">
+            <button type="submit" class="btn btn-danger">Удалить</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
